@@ -16,7 +16,7 @@ const main = async () => {
         // await employeeRepository.getAllEmp();
 
         // With Transaction
-        await employeeRepository.createWithTransaction()
+        await employeeRepository.updateEmpBalance()
     } catch (err) {
         console.error(err)
     }
