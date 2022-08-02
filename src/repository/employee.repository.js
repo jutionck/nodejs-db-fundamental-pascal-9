@@ -1,8 +1,11 @@
 const {pool} = require('../config/db');
-const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById} = require('../utils/query')
+const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById} = require('../utils/query');
 
 const createEmp = (employee) => {
-    pool.query(insertEmployee, employee, (err, res) => {
+    pool.query(
+        insertEmployee,
+        [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address],
+        (err, res) => {
         if (err) {
             console.log(err)
         }
@@ -11,7 +14,7 @@ const createEmp = (employee) => {
 }
 
 const updateEmp = (employee) => {
-    pool.query(updateEmployee, employee,  (err, res) => {
+    pool.query(updateEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address, employee.id],  (err, res) => {
         if (err) {
             console.log(err)
         }
@@ -20,7 +23,7 @@ const updateEmp = (employee) => {
 }
 
 const deleteEmp = (id) => {
-    pool.query(deleteEmployee, id,  (err, res) => {
+    pool.query(deleteEmployee, [id],  (err, res) => {
         if (err) {
             console.log(err)
         }
@@ -38,7 +41,7 @@ const getAllEmp = () => {
 }
 
 const getEmpById = (id) => {
-    pool.query(selectEmployeeById, id,  (err, res) => {
+    pool.query(selectEmployeeById, [id],  (err, res) => {
         if (err) {
             console.log(err)
         }
