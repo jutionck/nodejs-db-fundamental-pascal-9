@@ -1,5 +1,5 @@
 const {pool} = require('../config/db');
-const {insertEmployee, updateEmployee, deleteEmployee} = require('../utils/query')
+const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById} = require('../utils/query')
 
 const createEmp = (employee) => {
     pool.query(insertEmployee, employee, (err, res) => {
@@ -28,8 +28,28 @@ const deleteEmp = (id) => {
     });
 }
 
+const getAllEmp = () => {
+    pool.query(selectEmployee,  (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(res.rows);
+    });
+}
+
+const getEmpById = (id) => {
+    pool.query(selectEmployeeById, id,  (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(res.rows[0]);
+    });
+}
+
 module.exports = {
     createEmp,
     updateEmp,
-    deleteEmp
+    deleteEmp,
+    getAllEmp,
+    getEmpById
 }
