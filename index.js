@@ -1,22 +1,22 @@
-const {createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById} = require('./src/repository/employee.repository');
-const Employee = require('./src/model/employee')
-/**
- * Cara menjalankan silahkan lakukan comment pada function yanng tidak dibutuhkan
- * Query values must be an array
- */
+const EmployeeRepository = require('./src/repository/employee.repository');
+const Employee = require('./src/model/employee');
 
-// const addEmp01 = ['Bulan', 'Sutisna', '2000-02-12', 'Bali', 'Bali'];
-// createEmp(addEmp01);
+const employeeRepository = EmployeeRepository()
+const main = async () => {
+    try {
 
-// With Object
-// const employee = Employee('', 'Suci', 'Debu', '1992-02-02', 'Bandung', 'Bandung');
-// createEmp(employee);
+        // Silahkan comment bagian yang tidak di perlukan
 
-// const updateEmp01 = ['Bulan', 'Sutina', '2000-02-12', 'Bali', 'Bali', 8];
-// updateEmp(updateEmp01)
-//
-// const deleteEmp01 = [9];
-// deleteEmp(deleteEmp01);
+        // const employee01 = Employee('', 'Suci', 'Debu', '1992-02-02', 'Bandung', 'Bandung');
+        // await employeeRepository.createEmp(employee01);
+        // const employee02 = Employee(16, 'Jution', 'Candra', '1992-02-02', 'Bandung', 'Bandung');
+        // await employeeRepository.updateEmp(employee02);
+        // await employeeRepository.deleteEmp(14);
+        // await employeeRepository.getEmpById(15);
+        await employeeRepository.getAllEmp();
+    } catch (err) {
+        console.error(err)
+    }
+}
 
-// getAllEmp();
-getEmpById(12)
+main()
