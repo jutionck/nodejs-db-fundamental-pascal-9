@@ -13,10 +13,13 @@ const main = async () => {
         // await employeeRepository.updateEmp(employee02);
         // await employeeRepository.deleteEmp(14);
         // await employeeRepository.getEmpById(15);
-        await employeeRepository.getAllEmp();
+        // await employeeRepository.getAllEmp();
+
+        // With Transaction
+        await employeeRepository.createWithTransaction()
     } catch (err) {
         console.error(err)
     }
 }
 
-main()
+main().catch()

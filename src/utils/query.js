@@ -3,11 +3,13 @@ const updateEmployee = `UPDATE m_employee set first_name = $1,last_name = $2,dob
 const deleteEmployee = `DELETE FROM m_employee where id=$1`;
 const selectEmployee = `SELECT first_name,last_name,dob,pob,address from m_employee order by id asc`;
 const selectEmployeeById = `SELECT first_name,last_name,dob,pob,address from m_employee where id = $1`;
+const updateBalance = `UPDATE m_employee set balance = (balance + $1) where id = $2`;
 
 module.exports = {
     insertEmployee,
     updateEmployee,
     deleteEmployee,
     selectEmployee,
-    selectEmployeeById
+    selectEmployeeById,
+    updateBalance
 }

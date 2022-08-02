@@ -1,4 +1,4 @@
-const Employee = (id, firstName, lastName, bod, pob, address) => {
+const Employee = (id, firstName, lastName, bod, pob, address, balance) => {
     return {
         id,
         firstName,
@@ -6,6 +6,7 @@ const Employee = (id, firstName, lastName, bod, pob, address) => {
         bod,
         pob,
         address,
+        balance,
     }
 }
 

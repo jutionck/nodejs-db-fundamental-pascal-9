@@ -1,7 +1,24 @@
 const {pool} = require('../config/db');
-const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById} = require('../utils/query');
+const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById, updateBalance} = require('../utils/query');
 
 const EmployeeRepository = () => {
+
+    const createWithTransaction = async () => {
+        const client = await pool.connect()
+        try {
+            await client.query('BEGIN')
+            // Tambahkan kolom balance di tabel employee
+            await client.query(updateBalance, [25000, "15"]);
+            await client.query(updateBalance, [25000, 24]);
+            await client.query('COMMIT')
+        } catch (e) {
+            await client.query('ROLLBACK')
+            throw e
+        } finally {
+            client.release()
+        }
+    }
+
     const createEmp = (employee) => {
         console.log(`Employee create process....`);
         pool.query(insertEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address], (err, res) => {
@@ -54,7 +71,7 @@ const EmployeeRepository = () => {
     }
 
     return {
-        createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById
+        createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById, createWithTransaction
     }
 }
 module.exports = EmployeeRepository
