@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-db-fundamental-pascal-9",
+  "version": "1.0.0",
+  "description": "Sample NodeJS with PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "author": "Jution Candra Kirana",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.7.3"
+  }
+}
