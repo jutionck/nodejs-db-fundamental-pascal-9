@@ -2,7 +2,6 @@ const {pool} = require('../config/db');
 const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById, updateBalance} = require('../utils/query');
 
 const EmployeeRepository = () => {
-
     const updateEmpBalance = async () => {
         console.log(`Employee update with transactions process....`);
         const client = await pool.connect()
