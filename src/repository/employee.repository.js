@@ -22,8 +22,7 @@ const EmployeeRepository = () => {
     const createEmp = async (employee) => {
         console.log(`Employee create process....`);
         try {
-            const res = await pool.query(insertEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address]);
-            console.log(`Employee added with ID: ${res.rows[0].id}`);
+            return await pool.query(insertEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address]);
         } catch (error) {
             console.error(error)
         }
@@ -32,8 +31,7 @@ const EmployeeRepository = () => {
     const updateEmp = async (employee) => {
         console.log(`Employee update process....`);
         try {
-            await pool.query(updateEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address, employee.id]);
-            console.log(`Employee updated with ID: ${employee.id}`);
+            return await pool.query(updateEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address, employee.id]);
         } catch (error) {
             console.error(error)
         }
@@ -42,8 +40,7 @@ const EmployeeRepository = () => {
     const deleteEmp = async (id) => {
         console.log(`Employee delete process....`);
         try {
-            await pool.query(deleteEmployee, [id]);
-            console.log(`Employee deleted success: ${id}`);
+            return await pool.query(deleteEmployee, [id]);
         }  catch (error) {
             console.error(error)
         }
@@ -52,8 +49,7 @@ const EmployeeRepository = () => {
     const getAllEmp = async () => {
         console.log(`Employee get all process....`);
         try {
-            const res = await pool.query(selectEmployee);
-            console.log(res.rows);
+            return await pool.query(selectEmployee);
         } catch (error) {
             console.error(error)
         }
@@ -62,8 +58,7 @@ const EmployeeRepository = () => {
     const getEmpById = async (id) => {
         console.log(`Employee get by id process....`);
         try {
-            const res = await pool.query(selectEmployeeById, [id]);
-            console.log(res.rows[0]);
+            return await pool.query(selectEmployeeById, [id]);
         } catch (error) {
             console.error(error)
         }
