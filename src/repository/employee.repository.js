@@ -32,7 +32,7 @@ const EmployeeRepository = () => {
                 newEmployee.pob = result.rows[i].pob;
                 newEmployee.address = result.rows[i].address;
             }
-            return result;
+            return newEmployee;
         } catch (error) {
             console.error(error)
         }
