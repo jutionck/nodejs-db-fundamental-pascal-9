@@ -1,5 +1,6 @@
 const EmployeeRepository = require('../repository/employee.repository');
 const EmployeeUseCase = require("../usecase/employee.usecase");
+const {Response, commonResponse} = require('../utils/response');
 
 const employeeUseCase = EmployeeUseCase(EmployeeRepository());
 
@@ -16,7 +17,8 @@ const get = async (req, res) => {
             address: employees.rows[i].address,
         });
     }
-    res.end(JSON.stringify(employee));
+    const response = Response().successMessage(res.statusCode,commonResponse.successMessage, employee)
+    res.end(JSON.stringify(response));
 }
 
 const getById = async (req, res, id) => {
@@ -30,7 +32,8 @@ const getById = async (req, res, id) => {
         emp.pob = employee.rows[i].pob;
         emp.address = employee.rows[i].address;
     }
-    res.end(JSON.stringify(emp));
+    const response = Response().successMessage(res.statusCode,commonResponse.successMessage, emp)
+    res.end(JSON.stringify(response));
 }
 
 const create = async (req, res, employee) => {
