@@ -51,7 +51,7 @@ const EmployeeRepository = () => {
                 updateEmployee.pob = result.rows[i].pob;
                 updateEmployee.address = result.rows[i].address;
             }
-            return result;
+            return updateEmployee;
         } catch (error) {
             console.error(error)
         }
