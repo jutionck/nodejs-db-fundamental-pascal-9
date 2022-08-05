@@ -11,7 +11,7 @@ const get = async (req, res) => {
 }
 
 const getById = async (req, res, id) => {
-    const employee = await employeeUseCase.getEmployeeById(id.id);
+    const employee = await employeeUseCase.getEmployeeById(id);
     const response = Response().successMessage(res.statusCode,commonResponse.successMessage, employee)
     res.end(JSON.stringify(response));
 }
@@ -27,7 +27,7 @@ const update = async (req, res, employee) => {
 }
 
 const deleteEmp = async (req, res, id) => {
-    const result = await employeeUseCase.deleteEmployee(id.id);
+    const result = await employeeUseCase.deleteEmployee(id);
     res.end(JSON.stringify(result));
 }
 

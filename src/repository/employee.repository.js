@@ -116,9 +116,8 @@ const EmployeeRepository = () => {
     const getEmployeeByPobOrAddress = async (data) => {
         console.log(`Employee get employee by pob or address process....`);
         try {
-            const { keyword } = data;
-            const keywordLike = `%${keyword}%`
-            const result = await pool.query(filterByPobOrAddress, [keywordLike]);
+            const keyword = `%${data}%`
+            const result = await pool.query(filterByPobOrAddress, [keyword]);
             const employees = [];
             for (let i = 0;i < result.rows.length; i++) {
                 employees.push({
