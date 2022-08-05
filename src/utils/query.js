@@ -4,6 +4,7 @@ const deleteEmployee = `DELETE FROM m_employee where id=$1`;
 const selectEmployee = `SELECT id, first_name,last_name,dob,pob,address from m_employee order by id asc`;
 const selectEmployeeById = `SELECT id, first_name,last_name,dob,pob,address from m_employee where id = $1`;
 const updateBalance = `UPDATE m_employee set balance = (balance + $1) where id = $2`;
+const filterByPobOrAddress = `SELECT id, first_name,last_name,dob,pob,address from m_employee WHERE pob ilike $1 or address ilike $1`;
 
 module.exports = {
     insertEmployee,
@@ -11,5 +12,6 @@ module.exports = {
     deleteEmployee,
     selectEmployee,
     selectEmployeeById,
-    updateBalance
+    updateBalance,
+    filterByPobOrAddress
 }

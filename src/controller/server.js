@@ -1,6 +1,6 @@
 const http = require("http");
 const port = 8181;
-const { get, getById, create, update, deleteEmp } = require('./employee.controller');
+const { get, getById, create, update, deleteEmp, filterByPobAddress} = require('./employee.controller');
 const {Response} = require("../utils/response");
 
 const run = () => {
@@ -31,6 +31,11 @@ const run = () => {
                 request.addListener('data', (data) => {
                     const body = JSON.parse(data);
                     deleteEmp(request, response, body).catch();
+                });
+            } else if (request.method === 'GET' && request.url === '/employee/address-pob') {
+                request.addListener('data', (data) => {
+                    const body = JSON.parse(data);
+                    filterByPobAddress(request, response, body).catch();
                 });
             }
         }

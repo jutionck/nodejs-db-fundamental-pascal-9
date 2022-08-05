@@ -31,6 +31,17 @@ const deleteEmp = async (req, res, id) => {
     res.end(JSON.stringify(result));
 }
 
+const filterByPobAddress = async (req, res, filter) => {
+    const employees = await employeeUseCase.filterEmployeeByPobAddress(filter);
+    const response = Response().successMessage(res.statusCode,commonResponse.successMessage, employees)
+    res.end(JSON.stringify(response));
+}
+
 module.exports = {
-    get, getById, create, update, deleteEmp
+    get,
+    getById,
+    create,
+    update,
+    deleteEmp,
+    filterByPobAddress
 }

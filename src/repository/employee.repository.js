@@ -1,5 +1,7 @@
 const {pool} = require('../config/db');
-const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById, updateBalance} = require('../utils/query');
+const {insertEmployee, updateEmployee, deleteEmployee, selectEmployee, selectEmployeeById, updateBalance,
+    filterByPobOrAddress
+} = require('../utils/query');
 
 const EmployeeRepository = () => {
     const updateEmpBalance = async () => {
@@ -111,8 +113,37 @@ const EmployeeRepository = () => {
         }
     }
 
+    const getEmployeeByPobOrAddress = async (data) => {
+        console.log(`Employee get employee by pob or address process....`);
+        try {
+            const { keyword } = data;
+            const keywordLike = `%${keyword}%`
+            const result = await pool.query(filterByPobOrAddress, [keywordLike]);
+            const employees = [];
+            for (let i = 0;i < result.rows.length; i++) {
+                employees.push({
+                    id: result.rows[i].id,
+                    firstName: result.rows[i].first_name,
+                    lastName: result.rows[i].last_name,
+                    dob: result.rows[i].dob,
+                    pob: result.rows[i].pob,
+                    address: result.rows[i].address,
+                });
+            }
+            return employees;
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return {
-        createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById, updateEmpBalance
+        createEmp,
+        updateEmp,
+        deleteEmp,
+        getAllEmp,
+        getEmpById,
+        updateEmpBalance,
+        getEmployeeByPobOrAddress,
     }
 }
 module.exports = EmployeeRepository

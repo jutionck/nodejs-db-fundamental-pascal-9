@@ -1,5 +1,5 @@
 const EmployeeUseCase = (employeeRepository) => {
-    const {createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById, updateEmpBalance} = employeeRepository;
+    const {createEmp, updateEmp, deleteEmp, getAllEmp, getEmpById, updateEmpBalance, getEmployeeByPobOrAddress} = employeeRepository;
     const getAllEmployee = async () => {
         return await getAllEmp();
     }
@@ -18,8 +18,18 @@ const EmployeeUseCase = (employeeRepository) => {
     const updateEmployeeBalance = async () => {
         return await updateEmpBalance();
     }
+
+    const filterEmployeeByPobAddress = async (filter) => {
+        return await getEmployeeByPobOrAddress(filter);
+    }
     return {
-        getAllEmployee, getEmployeeById, newEmployeeInfo, updateEmployeeInfo, deleteEmployee, updateEmployeeBalance
+        getAllEmployee,
+        getEmployeeById,
+        newEmployeeInfo,
+        updateEmployeeInfo,
+        deleteEmployee,
+        updateEmployeeBalance,
+        filterEmployeeByPobAddress
     }
 }
 
