@@ -7,16 +7,27 @@ const EmployeeRepository = () => {
         console.log(`Employee update with transactions process....`);
         const client = await pool.connect()
         try {
-            await client.query('BEGIN')
-            // Tambahkan kolom balance di tabel employee
-            await client.query(updateBalance, [25000, "15"]);
-            await client.query(updateBalance, [25000, 24]);
-            await client.query('COMMIT')
-        } catch (e) {
-            await client.query('ROLLBACK')
-            throw e
+            await client.query("BEGIN");
+            try {
+                await client.query(updateBalance, [1000, "hh"], function(err, result) {
+                    console.log("client.query() SQL result:", result);
+                    if (err) {
+                        console.log("\nclient.query():", err);
+                        client.query("ROLLBACK");
+                        console.log("Transaction ROLLBACK called");
+                    } else {
+                        client.query("COMMIT");
+                        console.log("client.query() COMMIT row count:", result.rowCount);
+                    }
+                });
+            } catch (er) {
+                client.query("ROLLBACK");
+                console.log("client.query():", er);
+                console.log("Transaction ROLLBACK called");
+            }
         } finally {
-            client.release()
+            client.release();
+            console.log("Client is released");
         }
     }
 
