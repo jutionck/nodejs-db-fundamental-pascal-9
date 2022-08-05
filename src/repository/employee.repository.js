@@ -31,7 +31,7 @@ const EmployeeRepository = () => {
     const updateEmp = async (employee) => {
         console.log(`Employee update process....`);
         try {
-            return await pool.query(updateEmployee, [employee.firstName, employee.lastName, employee.bod, employee.pob, employee.address, employee.id]);
+            return await pool.query(updateEmployee, [employee.firstName, employee.lastName, employee.dob, employee.pob, employee.address, employee.id]);
         } catch (error) {
             console.error(error)
         }
@@ -40,7 +40,12 @@ const EmployeeRepository = () => {
     const deleteEmp = async (id) => {
         console.log(`Employee delete process....`);
         try {
-            return await pool.query(deleteEmployee, [id]);
+            const result = await pool.query(deleteEmployee, [id]);
+            if (result.rowCount === 0) {
+                return `Delete with ID ${id} not found`
+            } else {
+                return `Delete with ID ${id} success`
+            }
         }  catch (error) {
             console.error(error)
         }
